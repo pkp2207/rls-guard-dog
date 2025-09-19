@@ -7,7 +7,6 @@ import type {
   Student,
   Teacher,
   Progress,
-  UserRole,
   SubjectType,
   ProgressFilters,
   StudentFilters,
@@ -19,35 +18,35 @@ import type {
 
 // User profile operations
 export async function getUserProfile(supabase: SupabaseClient, userId: string) {
-  // First check if user is a teacher
-  const { data: teacher, error: teacherError } = await supabase
-    .from('teachers')
-    .select(`
-      *,
-      schools (*)
-    `)
-    .eq('user_id', userId)
-    .single();
+  console.log('🔍 Looking up profile for user ID:', userId);
+  
+  try {
+    // Use server-side API to avoid RLS recursion and service role issues
+    const response = await fetch(`/api/profile?user_id=${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (teacher && !teacherError) {
-    return { profile: teacher, role: teacher.role as UserRole };
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('❌ API error:', errorData);
+      throw new Error(`Profile lookup failed: ${errorData.error || response.statusText}`);
+    }
+
+    const responseData = await response.json();
+    console.log('✅ Successfully retrieved profile via API:', responseData);
+    
+    // The API returns { profile: {...}, role: "..." }
+    return {
+      profile: responseData.profile,
+      role: responseData.role
+    };
+  } catch (error) {
+    console.error('❌ Error in getUserProfile:', error);
+    throw error;
   }
-
-  // Then check if user is a student
-  const { data: student, error: studentError } = await supabase
-    .from('students')
-    .select(`
-      *,
-      schools (*)
-    `)
-    .eq('user_id', userId)
-    .single();
-
-  if (student && !studentError) {
-    return { profile: student, role: 'student' as UserRole };
-  }
-
-  throw new Error('User profile not found');
 }
 
 // Progress operations

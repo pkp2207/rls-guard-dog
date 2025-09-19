@@ -1,6 +1,6 @@
 // Simple setup script for demo users
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Manually load .env.local
 const envPath = path.join(__dirname, '..', '.env.local');

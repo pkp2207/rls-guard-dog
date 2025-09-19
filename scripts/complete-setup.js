@@ -1,6 +1,6 @@
 // Complete database setup with schools, users, and profiles
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Manually load .env.local
 const envPath = path.join(__dirname, '..', '.env.local');
@@ -17,7 +17,7 @@ envContent.split('\n').forEach(line => {
 
 console.log('🔄 Environment variables loaded');
 
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

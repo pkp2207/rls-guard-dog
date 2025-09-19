@@ -1,6 +1,10 @@
 // Add sample progress data to the database
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 const envPath = path.join(__dirname, '..', '.env.local');
@@ -10,11 +14,9 @@ envContent.split('\n').forEach(line => {
   const trimmed = line.trim();
   if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
     const [key, ...values] = trimmed.split('=');
-    process.env[key.trim()] = values.join('=').trim();
   }
 });
-
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
