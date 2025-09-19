@@ -56,11 +56,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [supabase]);
 
-  const refreshProfile = async () => {
+  const refreshProfile = useCallback(async () => {
     if (user) {
       await loadUserProfile(user);
     }
-  };
+  }, [user, loadUserProfile]);
 
   useEffect(() => {
     const getSession = async () => {
@@ -95,22 +95,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, [supabase.auth, loadUserProfile]);
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = useCallback(async (email: string, password: string) => {
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase auth error:', error);
+        throw new Error(`Authentication failed: ${error.message}`);
+      }
+      
+      console.log('Sign in successful:', data);
     } catch (error) {
       setLoading(false);
+      console.error('Sign in error:', error);
       throw error;
     }
-  };
+  }, [supabase.auth]);
 
-  const signUp = async (email: string, password: string, userData: SignUpData) => {
+  const signUp = useCallback(async (email: string, password: string, userData: SignUpData) => {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signUp({
@@ -126,9 +132,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
       throw error;
     }
-  };
+  }, [supabase.auth]);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signOut();
@@ -137,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
       throw error;
     }
-  };
+  }, [supabase.auth]);
 
   const value = useMemo(() => ({
     user,

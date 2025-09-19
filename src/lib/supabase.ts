@@ -8,19 +8,31 @@ import { createBrowserClient, createServerClient } from '@supabase/ssr';
 // Environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
-}
+// Validate environment variables
+const validateEnvVars = () => {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing Supabase environment variables. Please check your .env.local file.');
+    return false;
+  }
+  return true;
+};
 
 // Client-side Supabase client
 export const createClientComponentClient = () => {
+  if (!validateEnvVars()) {
+    throw new Error('Missing Supabase environment variables');
+  }
   return createBrowserClient(supabaseUrl, supabaseAnonKey);
 };
 
 // Server-side Supabase client for Server Components
 export const createServerComponentClient = async () => {
+  if (!validateEnvVars()) {
+    throw new Error('Missing Supabase environment variables');
+  }
+  
   const { cookies } = await import('next/headers');
   const cookieStore = await cookies();
   
@@ -29,8 +41,13 @@ export const createServerComponentClient = async () => {
     supabaseAnonKey,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
+        getAll() {
+          return cookieStore.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options)
+          })
         },
       },
     }
@@ -39,6 +56,10 @@ export const createServerComponentClient = async () => {
 
 // Server-side Supabase client for Route Handlers (API routes)
 export const createRouteHandlerClient = async () => {
+  if (!validateEnvVars()) {
+    throw new Error('Missing Supabase environment variables');
+  }
+  
   const { cookies } = await import('next/headers');
   const cookieStore = await cookies();
   
@@ -47,14 +68,13 @@ export const createRouteHandlerClient = async () => {
     supabaseAnonKey,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
+        getAll() {
+          return cookieStore.getAll()
         },
-        set(name: string, value: string, options: Record<string, unknown>) {
-          cookieStore.set({ name, value, ...options });
-        },
-        remove(name: string, options: Record<string, unknown>) {
-          cookieStore.set({ name, value: '', ...options });
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options)
+          })
         },
       },
     }
@@ -63,8 +83,8 @@ export const createRouteHandlerClient = async () => {
 
 // Admin client with service role key (for server-side operations)
 export const createAdminClient = () => {
-  if (!supabaseServiceRoleKey) {
-    throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable');
+  if (!supabaseUrl || !supabaseServiceRoleKey) {
+    throw new Error('Missing Supabase URL or service role key');
   }
   
   return createClient(supabaseUrl, supabaseServiceRoleKey, {
@@ -75,8 +95,10 @@ export const createAdminClient = () => {
   });
 };
 
-// Legacy client for backwards compatibility
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Legacy client for backwards compatibility - only create if env vars are available
+export const supabase = validateEnvVars() 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 // Export types
 export type SupabaseClient = ReturnType<typeof createClientComponentClient>;

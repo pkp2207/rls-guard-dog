@@ -6,15 +6,18 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { supabase } from '@/lib/supabase';
+import { createClientComponentClient } from '@/lib/supabase';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
 
 interface Student {
   id: string;
   first_name: string;
   last_name: string;
   email: string;
-  class_level: string;
+  class_name: string;
 }
 
 interface ProgressRecord {
@@ -41,6 +44,16 @@ interface EditingProgress {
   max_score: number;
 }
 
+interface ProgressDbItem {
+  id: string;
+  student_id: string;
+  subject: string;
+  score: number;
+  max_score: number;
+  completed_at: string;
+  students?: { first_name: string; last_name: string }[];
+}
+
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
 export default function TeacherDashboard() {
@@ -61,7 +74,9 @@ export default function TeacherDashboard() {
   });
   const [showNewProgressForm, setShowNewProgressForm] = useState(false);
 
-  const subjects = ['Mathematics', 'English', 'Science', 'History', 'Geography'];
+  const subjects = ['math', 'science', 'english', 'history', 'geography', 'arts', 'pe', 'other'];
+
+  const supabase = createClientComponentClient();
 
   const fetchTeacherData = useCallback(async () => {
     try {
@@ -76,12 +91,13 @@ export default function TeacherDashboard() {
           first_name,
           last_name,
           email,
-          class_level
+          class_name
         `)
         .order('last_name');
 
       if (studentsError) {
-        throw studentsError;
+        console.error('Students query error:', studentsError);
+        throw new Error(`Failed to fetch students: ${studentsError.message}`);
       }
 
       setStudents(studentsData || []);
@@ -104,11 +120,12 @@ export default function TeacherDashboard() {
         .order('completed_at', { ascending: false });
 
       if (progressError) {
-        throw progressError;
+        console.error('Progress query error:', progressError);
+        throw new Error(`Failed to fetch progress: ${progressError.message}`);
       }
 
       // Format progress data with calculated percentages and student names
-      const formattedProgress: ProgressRecord[] = (progressData || []).map(item => {
+      const formattedProgress: ProgressRecord[] = (progressData || []).map((item: ProgressDbItem) => {
         const studentData = Array.isArray(item.students) && item.students.length > 0 ? item.students[0] : null;
         return {
           ...item,
@@ -147,7 +164,7 @@ export default function TeacherDashboard() {
     } finally {
       setLoadingData(false);
     }
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     if (!loading && userSession) {

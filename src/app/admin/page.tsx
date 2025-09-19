@@ -4,18 +4,19 @@
 
 'use client';
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { 
-  calculateClassAverages, 
-  calculateCurrentMonthAverages,
-  testEdgeFunctionHealth 
+
+import type { 
 } from '@/lib/edge-functions';
 
 interface TestResult {
   success: boolean;
   message: string;
-  data?: any;
+  data?: unknown;
   error?: string;
   timestamp: string;
 }
@@ -50,6 +51,7 @@ export default function AdminPage() {
   const testEdgeFunction = async () => {
     setLoading(true);
     try {
+      const { testEdgeFunctionHealth } = await import('@/lib/edge-functions');
       const result = await testEdgeFunctionHealth();
       addTestResult({
         success: result.success,
@@ -80,6 +82,7 @@ export default function AdminPage() {
 
     setLoading(true);
     try {
+      const { calculateCurrentMonthAverages } = await import('@/lib/edge-functions');
       const result = await calculateCurrentMonthAverages(schoolId);
       addTestResult({
         success: result.success,
@@ -110,6 +113,7 @@ export default function AdminPage() {
 
     setLoading(true);
     try {
+      const { calculateClassAverages } = await import('@/lib/edge-functions');
       const result = await calculateClassAverages({
         school_id: schoolId,
         month: parseInt(month),
@@ -325,7 +329,7 @@ export default function AdminPage() {
                     </p>
                   )}
 
-                  {result.data && (
+                  {result.data ? (
                     <details className="text-sm">
                       <summary className="cursor-pointer text-gray-600 hover:text-gray-800">
                         View Details
@@ -334,7 +338,7 @@ export default function AdminPage() {
                         {JSON.stringify(result.data, null, 2)}
                       </pre>
                     </details>
-                  )}
+                  ) : null}
                 </div>
               ))}
             </div>

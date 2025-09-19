@@ -1,0 +1,98 @@
+{
+  "sample_users": [
+    {
+      "email": "john.smith@greenwood.edu",
+      "password": "demo123",
+      "role": "head_teacher",
+      "first_name": "John",
+      "last_name": "Smith",
+      "school_id": "550e8400-e29b-41d4-a716-446655440001",
+      "school_name": "Greenwood Elementary School"
+    },
+    {
+      "email": "sarah.johnson@greenwood.edu",
+      "password": "demo123",
+      "role": "teacher",
+      "first_name": "Sarah",
+      "last_name": "Johnson",
+      "school_id": "550e8400-e29b-41d4-a716-446655440001",
+      "school_name": "Greenwood Elementary School",
+      "subject": "Mathematics"
+    },
+    {
+      "email": "alice.wilson@student.greenwood.edu",
+      "password": "demo123",
+      "role": "student",
+      "first_name": "Alice",
+      "last_name": "Wilson",
+      "school_id": "550e8400-e29b-41d4-a716-446655440001",
+      "school_name": "Greenwood Elementary School",
+      "class_level": "5th Grade"
+    },
+    {
+      "email": "james.rodriguez@lincoln.edu",
+      "password": "demo123",
+      "role": "head_teacher",
+      "first_name": "James",
+      "last_name": "Rodriguez",
+      "school_id": "550e8400-e29b-41d4-a716-446655440002",
+      "school_name": "Lincoln Middle School"
+    },
+    {
+      "email": "emily.davis@lincoln.edu",
+      "password": "demo123",
+      "role": "teacher",
+      "first_name": "Emily",
+      "last_name": "Davis",
+      "school_id": "550e8400-e29b-41d4-a716-446655440002",
+      "school_name": "Lincoln Middle School",
+      "subject": "Science"
+    },
+    {
+      "email": "bob.martinez@student.lincoln.edu",
+      "password": "demo123",
+      "role": "student",
+      "first_name": "Bob",
+      "last_name": "Martinez",
+      "school_id": "550e8400-e29b-41d4-a716-446655440002",
+      "school_name": "Lincoln Middle School",
+      "class_level": "7th Grade"
+    },
+    {
+      "email": "sarah.chen@roosevelt.edu",
+      "password": "demo123",
+      "role": "head_teacher",
+      "first_name": "Sarah",
+      "last_name": "Chen",
+      "school_id": "550e8400-e29b-41d4-a716-446655440003",
+      "school_name": "Roosevelt High School"
+    },
+    {
+      "email": "david.park@edison.edu",
+      "password": "demo123",
+      "role": "head_teacher",
+      "first_name": "David",
+      "last_name": "Park",
+      "school_id": "550e8400-e29b-41d4-a716-446655440007",
+      "school_name": "Edison STEM Academy"
+    },
+    {
+      "email": "rebecca.martinez@franklin.edu",
+      "password": "demo123",
+      "role": "head_teacher",
+      "first_name": "Rebecca",
+      "last_name": "Martinez",
+      "school_id": "550e8400-e29b-41d4-a716-446655440008",
+      "school_name": "Franklin Arts Magnet School"
+    },
+    {
+      "email": "hassan.ahmad@kennedy.edu",
+      "password": "demo123",
+      "role": "head_teacher",
+      "first_name": "Hassan",
+      "last_name": "Al-Ahmad",
+      "school_id": "550e8400-e29b-41d4-a716-446655440009",
+      "school_name": "Kennedy International School"
+    }
+  ]
+}

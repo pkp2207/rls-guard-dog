@@ -1,0 +1,124 @@
+{
+  "schools": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "name": "Greenwood Elementary School",
+      "address": "123 Oak Street, Springfield, IL 62701",
+      "phone": "(217) 555-0123",
+      "email": "admin@greenwood.edu",
+      "principal": "Dr. Margaret Thompson",
+      "type": "Elementary",
+      "grades": "K-5",
+      "student_count": 450,
+      "established": 1985
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440002",
+      "name": "Lincoln Middle School",
+      "address": "456 Maple Avenue, Springfield, IL 62702",
+      "phone": "(217) 555-0124",
+      "email": "office@lincoln.edu",
+      "principal": "Mr. James Rodriguez",
+      "type": "Middle School",
+      "grades": "6-8",
+      "student_count": 320,
+      "established": 1992
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "name": "Roosevelt High School",
+      "address": "789 Pine Boulevard, Springfield, IL 62703",
+      "phone": "(217) 555-0125",
+      "email": "info@roosevelt.edu",
+      "principal": "Ms. Sarah Chen",
+      "type": "High School",
+      "grades": "9-12",
+      "student_count": 850,
+      "established": 1978
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440004",
+      "name": "Washington Elementary",
+      "address": "321 Cedar Lane, Springfield, IL 62704",
+      "phone": "(217) 555-0126",
+      "email": "contact@washington.edu",
+      "principal": "Dr. Michael Johnson",
+      "type": "Elementary",
+      "grades": "K-5",
+      "student_count": 380,
+      "established": 1967
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440005",
+      "name": "Jefferson Academy",
+      "address": "654 Birch Drive, Springfield, IL 62705",
+      "phone": "(217) 555-0127",
+      "email": "academy@jefferson.edu",
+      "principal": "Mrs. Lisa Williams",
+      "type": "K-12",
+      "grades": "K-12",
+      "student_count": 720,
+      "established": 2001
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440006",
+      "name": "Martin Luther King Jr. Elementary",
+      "address": "987 Elm Street, Springfield, IL 62706",
+      "phone": "(217) 555-0128",
+      "email": "mlk@springfield.edu",
+      "principal": "Dr. Angela Davis",
+      "type": "Elementary",
+      "grades": "K-5",
+      "student_count": 520,
+      "established": 1995
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440007",
+      "name": "Edison STEM Academy",
+      "address": "147 Innovation Way, Springfield, IL 62707",
+      "phone": "(217) 555-0129",
+      "email": "stem@edison.edu",
+      "principal": "Mr. David Park",
+      "type": "STEM School",
+      "grades": "6-12",
+      "student_count": 650,
+      "established": 2010
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440008",
+      "name": "Franklin Arts Magnet School",
+      "address": "258 Creative Boulevard, Springfield, IL 62708",
+      "phone": "(217) 555-0130",
+      "email": "arts@franklin.edu",
+      "principal": "Ms. Rebecca Martinez",
+      "type": "Arts School",
+      "grades": "K-12",
+      "student_count": 430,
+      "established": 2005
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440009",
+      "name": "Kennedy International School",
+      "address": "369 Global Street, Springfield, IL 62709",
+      "phone": "(217) 555-0131",
+      "email": "international@kennedy.edu",
+      "principal": "Dr. Hassan Al-Ahmad",
+      "type": "International School",
+      "grades": "K-12",
+      "student_count": 590,
+      "established": 1998
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440010",
+      "name": "Adams Community School",
+      "address": "741 Community Road, Springfield, IL 62710",
+      "phone": "(217) 555-0132",
+      "email": "community@adams.edu",
+      "principal": "Mrs. Jennifer Brown",
+      "type": "Community School",
+      "grades": "K-8",
+      "student_count": 290,
+      "established": 1988
+    }
+  ]
+}

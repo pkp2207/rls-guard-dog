@@ -2,9 +2,6 @@
 -- Created: September 19, 2025
 -- Description: Database schema for role-based access control system with schools, teachers, students, and progress tracking
 
--- Enable Row Level Security
-ALTER DATABASE postgres SET "app.jwt_secret" TO 'your-jwt-secret';
-
 -- Create custom types for user roles
 CREATE TYPE user_role AS ENUM ('student', 'teacher', 'head_teacher');
 CREATE TYPE subject_type AS ENUM ('math', 'science', 'english', 'history', 'geography', 'arts', 'pe', 'other');
@@ -96,3 +93,58 @@ ALTER TABLE schools ENABLE ROW LEVEL SECURITY;
 ALTER TABLE teachers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE progress ENABLE ROW LEVEL SECURITY;
+
+-- RLS Policies for schools table
+CREATE POLICY "Users can view schools" ON schools FOR SELECT USING (true);
+CREATE POLICY "Authenticated users can insert schools" ON schools FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Authenticated users can update schools" ON schools FOR UPDATE USING (auth.role() = 'authenticated');
+
+-- RLS Policies for teachers table
+CREATE POLICY "Teachers can view their own profile" ON teachers FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Teachers can view other teachers in same school" ON teachers FOR SELECT USING (
+  school_id IN (
+    SELECT school_id FROM teachers WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Service role can manage teachers" ON teachers FOR ALL USING (auth.jwt() ->> 'role' = 'service_role');
+CREATE POLICY "Authenticated users can insert teachers" ON teachers FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Teachers can update their own profile" ON teachers FOR UPDATE USING (auth.uid() = user_id);
+
+-- RLS Policies for students table
+CREATE POLICY "Students can view their own profile" ON students FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Teachers can view students in their school" ON students FOR SELECT USING (
+  school_id IN (
+    SELECT school_id FROM teachers WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Service role can manage students" ON students FOR ALL USING (auth.jwt() ->> 'role' = 'service_role');
+CREATE POLICY "Authenticated users can insert students" ON students FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Students can update their own profile" ON students FOR UPDATE USING (auth.uid() = user_id);
+
+-- RLS Policies for progress table
+CREATE POLICY "Students can view their own progress" ON progress FOR SELECT USING (
+  student_id IN (
+    SELECT id FROM students WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Teachers can view progress for their school" ON progress FOR SELECT USING (
+  school_id IN (
+    SELECT school_id FROM teachers WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Teachers can insert progress" ON progress FOR INSERT WITH CHECK (
+  teacher_id IN (
+    SELECT id FROM teachers WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Teachers can update progress they created" ON progress FOR UPDATE USING (
+  teacher_id IN (
+    SELECT id FROM teachers WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Teachers can delete progress they created" ON progress FOR DELETE USING (
+  teacher_id IN (
+    SELECT id FROM teachers WHERE user_id = auth.uid()
+  )
+);
+CREATE POLICY "Service role can manage progress" ON progress FOR ALL USING (auth.jwt() ->> 'role' = 'service_role');

@@ -8,6 +8,10 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import { createClientComponentClient } from '@/lib/supabase';
 import type { UserRole, School } from '@/types/database';
 

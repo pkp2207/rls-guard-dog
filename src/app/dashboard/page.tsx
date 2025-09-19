@@ -4,16 +4,24 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
 
 export default function DashboardPage() {
   const { user, userSession, loading } = useAuth();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!loading) {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && !loading) {
       if (!user) {
         // Redirect to login if not authenticated
         router.push('/auth/login');
@@ -23,7 +31,7 @@ export default function DashboardPage() {
         router.push(dashboardPath);
       }
     }
-  }, [user, userSession, loading, router]);
+  }, [user, userSession, loading, router, mounted]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">

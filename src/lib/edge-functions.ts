@@ -2,7 +2,7 @@
 // Created: September 19, 2025
 // Description: Client-side utilities to call Supabase Edge Functions
 
-import { supabase } from './supabase';
+import { createClientComponentClient } from './supabase';
 
 // Interface for Edge Function responses
 export interface EdgeFunctionResponse<T = unknown> {
@@ -53,6 +53,15 @@ export async function calculateClassAverages(
 ): Promise<EdgeFunctionResponse<CalculateAveragesResponse>> {
   try {
     console.log('Calling calculate-class-averages Edge Function:', request);
+
+    const supabase = createClientComponentClient();
+    if (!supabase) {
+      return {
+        success: false,
+        error: 'Supabase client not initialized',
+        message: 'Failed to initialize Supabase client'
+      };
+    }
 
     const { data, error } = await supabase.functions.invoke('calculate-class-averages', {
       body: request,
@@ -165,6 +174,15 @@ export async function scheduleClassAveragesCalculation(
  */
 export async function testEdgeFunctionHealth(): Promise<EdgeFunctionResponse<{ status: string }>> {
   try {
+    const supabase = createClientComponentClient();
+    if (!supabase) {
+      return {
+        success: false,
+        error: 'Supabase client not initialized',
+        message: 'Failed to initialize Supabase client'
+      };
+    }
+
     const { error } = await supabase.functions.invoke('calculate-class-averages', {
       body: { test: true },
       headers: {
