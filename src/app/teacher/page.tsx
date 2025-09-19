@@ -44,16 +44,6 @@ interface EditingProgress {
   max_score: number;
 }
 
-interface ProgressDbItem {
-  id: string;
-  student_id: string;
-  subject: string;
-  score: number;
-  max_score: number;
-  completed_at: string;
-  students?: { first_name: string; last_name: string }[];
-}
-
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
 export default function TeacherDashboard() {
@@ -100,7 +90,7 @@ export default function TeacherDashboard() {
         throw new Error(`Failed to fetch students: ${studentsError.message}`);
       }
 
-      setStudents(studentsData || []);
+  setStudents(studentsData || []);
 
       // Fetch progress data for all students under this teacher
       const { data: progressData, error: progressError } = await supabase
@@ -124,15 +114,25 @@ export default function TeacherDashboard() {
         throw new Error(`Failed to fetch progress: ${progressError.message}`);
       }
 
+      // Build a quick lookup from student_id -> name as a fallback if nested relation is null
+      const studentNameLookup = new Map<string, string>(
+        (studentsData || []).map((s) => [s.id, `${s.first_name} ${s.last_name}`])
+      );
+
       // Format progress data with calculated percentages and student names
-      const formattedProgress: ProgressRecord[] = (progressData || []).map((item: ProgressDbItem) => {
-        const studentData = Array.isArray(item.students) && item.students.length > 0 ? item.students[0] : null;
+      const formattedProgress: ProgressRecord[] = (progressData || []).map((item) => {
+        // Handle both single object and array responses from Supabase relation
+        const studentData = Array.isArray(item.students) 
+          ? item.students[0] 
+          : item.students;
+        const fallbackName = studentNameLookup.get(item.student_id);
+        
         return {
           ...item,
           percentage: Math.round((item.score / item.max_score) * 100),
-          student_name: studentData 
-            ? `${studentData.first_name} ${studentData.last_name}` 
-            : 'Unknown'
+          student_name: studentData
+            ? `${studentData.first_name} ${studentData.last_name}`
+            : (fallbackName || 'Unknown')
         };
       });
 

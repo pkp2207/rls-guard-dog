@@ -30,9 +30,25 @@ export async function getUserProfile(supabase: SupabaseClient, userId: string) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('❌ API error:', errorData);
-      throw new Error(`Profile lookup failed: ${errorData.error || response.statusText}`);
+      // Try to parse JSON; if it fails, fallback to text
+      let errorPayload: unknown = null;
+      try {
+        errorPayload = await response.json();
+      } catch {
+        try {
+          errorPayload = await response.text();
+        } catch {
+          errorPayload = null;
+        }
+      }
+      console.error('❌ API error:', errorPayload, 'status:', response.status);
+      const hasErrorKey = (val: unknown): val is { error: string } => {
+        return typeof val === 'object' && val !== null && 'error' in val;
+      };
+      const message = hasErrorKey(errorPayload)
+        ? errorPayload.error
+        : response.statusText;
+      throw new Error(`Profile lookup failed: ${message}`);
     }
 
     const responseData = await response.json();

@@ -20,11 +20,11 @@ export async function GET(request: NextRequest) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    // Check if user is a teacher
+    // Check if user is a teacher (tables store auth user id in `user_id`)
     const { data: teacher, error: teacherError } = await supabase
       .from('teachers')
       .select('*')
-      .eq('auth_user_id', userId)
+      .eq('user_id', userId)
       .single();
 
     if (teacher && !teacherError) {
@@ -46,11 +46,11 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Check if user is a student
+    // Check if user is a student (tables store auth user id in `user_id`)
     const { data: student, error: studentError } = await supabase
       .from('students')
       .select('*')
-      .eq('auth_user_id', userId)
+      .eq('user_id', userId)
       .single();
 
     if (student && !studentError) {
