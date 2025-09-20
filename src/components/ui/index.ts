@@ -6,6 +6,7 @@
 export { Button } from './button';
 export { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from './card';
 export { Input } from './input';
+export { Select } from './select';
 
 // Feedback components
 export { Badge } from './badge';
@@ -27,6 +28,9 @@ export {
 
 // Loading components
 export { LoadingSpinner, LoadingDots, Skeleton, LoadingCard, LoadingOverlay } from './loading';
+
+// Auth components
+export { default as LogoutButton } from './logout-button';
 
 // Types
 export type { ButtonProps } from './button';

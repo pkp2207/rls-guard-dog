@@ -229,11 +229,18 @@ export default function SignupPage() {
                 name="role"
                 value={formData.role}
                 onChange={handleInputChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.5em 1.5em',
+                  paddingRight: '2.5rem'
+                }}
               >
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-                <option value="head_teacher">Head Teacher</option>
+                <option value="student" className="py-2 px-3 text-gray-900 bg-white">Student</option>
+                <option value="teacher" className="py-2 px-3 text-gray-900 bg-white">Teacher</option>
+                <option value="head_teacher" className="py-2 px-3 text-gray-900 bg-white">Head Teacher</option>
               </select>
             </div>
 
@@ -248,11 +255,18 @@ export default function SignupPage() {
                 value={formData.schoolId}
                 onChange={handleInputChange}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.5em 1.5em',
+                  paddingRight: '2.5rem'
+                }}
               >
-                <option value="">Select a school</option>
+                <option value="" className="py-2 px-3 text-gray-500 bg-white">Select a school</option>
                 {schools.map((school) => (
-                  <option key={school.id} value={school.id}>
+                  <option key={school.id} value={school.id} className="py-2 px-3 text-gray-900 bg-white">
                     {school.name}
                   </option>
                 ))}

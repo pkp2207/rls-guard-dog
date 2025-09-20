@@ -7,6 +7,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { createClientComponentClient } from '@/lib/supabase';
+import LogoutButton from '@/components/ui/logout-button';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 // Disable static generation for this page
@@ -338,6 +339,7 @@ export default function TeacherDashboard() {
                 >
                   Refresh
                 </button>
+                <LogoutButton size="md" variant="danger" />
               </div>
             </div>
           </div>
@@ -428,11 +430,18 @@ export default function TeacherDashboard() {
                 id="student-filter"
                 value={selectedStudent}
                 onChange={(e) => setSelectedStudent(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.5em 1.5em',
+                  paddingRight: '2.5rem'
+                }}
               >
-                <option value="all">All Students</option>
+                <option value="all" className="py-2 px-3 text-gray-900 bg-white">All Students</option>
                 {students.map(student => (
-                  <option key={student.id} value={student.id}>
+                  <option key={student.id} value={student.id} className="py-2 px-3 text-gray-900 bg-white">
                     {student.first_name} {student.last_name}
                   </option>
                 ))}
@@ -444,11 +453,18 @@ export default function TeacherDashboard() {
                 id="subject-filter"
                 value={selectedSubject}
                 onChange={(e) => setSelectedSubject(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.5em 1.5em',
+                  paddingRight: '2.5rem'
+                }}
               >
-                <option value="all">All Subjects</option>
+                <option value="all" className="py-2 px-3 text-gray-900 bg-white">All Subjects</option>
                 {subjects.map(subject => (
-                  <option key={subject} value={subject}>
+                  <option key={subject} value={subject} className="py-2 px-3 text-gray-900 bg-white">
                     {subject}
                   </option>
                 ))}
@@ -507,7 +523,7 @@ export default function TeacherDashboard() {
                               ...editingProgress,
                               score: parseInt(e.target.value) || 0
                             })}
-                            className="w-16 border border-gray-300 rounded px-2 py-1"
+                            className="w-16 border border-gray-300 rounded px-2 py-1 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200"
                           />
                           <span>/</span>
                           <input
@@ -517,7 +533,7 @@ export default function TeacherDashboard() {
                               ...editingProgress,
                               max_score: parseInt(e.target.value) || 100
                             })}
-                            className="w-16 border border-gray-300 rounded px-2 py-1"
+                            className="w-16 border border-gray-300 rounded px-2 py-1 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200"
                           />
                         </div>
                       ) : (
@@ -603,11 +619,18 @@ export default function TeacherDashboard() {
                     value={newProgressForm.student_id}
                     onChange={(e) => setNewProgressForm({...newProgressForm, student_id: e.target.value})}
                     required
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: 'right 0.5rem center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '1.5em 1.5em',
+                      paddingRight: '2.5rem'
+                    }}
                   >
-                    <option value="">Select Student</option>
+                    <option value="" className="py-2 px-3 text-gray-500 bg-white">Select Student</option>
                     {students.map(student => (
-                      <option key={student.id} value={student.id}>
+                      <option key={student.id} value={student.id} className="py-2 px-3 text-gray-900 bg-white">
                         {student.first_name} {student.last_name}
                       </option>
                     ))}
@@ -620,11 +643,18 @@ export default function TeacherDashboard() {
                     value={newProgressForm.subject}
                     onChange={(e) => setNewProgressForm({...newProgressForm, subject: e.target.value})}
                     required
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: 'right 0.5rem center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '1.5em 1.5em',
+                      paddingRight: '2.5rem'
+                    }}
                   >
-                    <option value="">Select Subject</option>
+                    <option value="" className="py-2 px-3 text-gray-500 bg-white">Select Subject</option>
                     {subjects.map(subject => (
-                      <option key={subject} value={subject}>
+                      <option key={subject} value={subject} className="py-2 px-3 text-gray-900 bg-white">
                         {subject}
                       </option>
                     ))}
@@ -640,7 +670,8 @@ export default function TeacherDashboard() {
                       onChange={(e) => setNewProgressForm({...newProgressForm, score: e.target.value})}
                       required
                       min="0"
-                      className="w-full border border-gray-300 rounded-md px-3 py-2"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200 placeholder-gray-500"
+                      placeholder="Enter score"
                     />
                   </div>
                   <div>
@@ -652,7 +683,8 @@ export default function TeacherDashboard() {
                       onChange={(e) => setNewProgressForm({...newProgressForm, max_score: e.target.value})}
                       required
                       min="1"
-                      className="w-full border border-gray-300 rounded-md px-3 py-2"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200 placeholder-gray-500"
+                      placeholder="Enter max score"
                     />
                   </div>
                 </div>

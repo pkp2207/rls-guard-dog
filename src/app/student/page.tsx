@@ -7,6 +7,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { createClientComponentClient } from '@/lib/supabase';
+import LogoutButton from '@/components/ui/logout-button';
 import { 
   LineChart, 
   Line, 
@@ -299,9 +300,12 @@ export default function StudentDashboard() {
                   <span>🏫 Year {student?.year_group}</span>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="text-3xl font-bold text-blue-600">{overallAverage}%</div>
-                <div className="text-sm text-gray-500">Overall Average</div>
+              <div className="flex items-center space-x-4">
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-blue-600">{overallAverage}%</div>
+                  <div className="text-sm text-gray-500">Overall Average</div>
+                </div>
+                <LogoutButton size="md" variant="danger" />
               </div>
             </div>
           </div>
@@ -339,11 +343,18 @@ export default function StudentDashboard() {
               <select
                 value={selectedSubject}
                 onChange={(e) => setSelectedSubject(e.target.value)}
-                className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+                className="border border-gray-300 rounded-md px-3 py-1 text-sm bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.2em 1.2em',
+                  paddingRight: '2rem'
+                }}
               >
-                <option value="all">All Subjects</option>
+                <option value="all" className="py-1 px-2 text-gray-900 bg-white">All Subjects</option>
                 {subjectSummaries.map(subject => (
-                  <option key={subject.subject} value={subject.subject}>
+                  <option key={subject.subject} value={subject.subject} className="py-1 px-2 text-gray-900 bg-white">
                     {subject.subject}
                   </option>
                 ))}
