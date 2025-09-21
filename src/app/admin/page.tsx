@@ -32,10 +32,10 @@ export default function AdminPage() {
   // Only allow head teachers to access this page
   if (!userSession || userSession.role !== 'head_teacher') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h1>
-          <p className="text-gray-600">This page is only accessible to head teachers.</p>
+          <h1 className="text-2xl font-bold text-red-400 mb-4">Access Denied</h1>
+          <p className="text-slate-400">This page is only accessible to head teachers.</p>
         </div>
       </div>
     );
@@ -166,36 +166,38 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="bg-white shadow rounded-lg p-6 mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-          <p className="text-gray-600">
+        <div className="bg-slate-800/50 backdrop-blur-sm shadow-xl rounded-xl border border-slate-700 p-6 mb-8">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+            Admin Dashboard
+          </h1>
+          <p className="text-slate-300">
             Test Edge Functions and MongoDB operations. Available to head teachers only.
           </p>
-          <div className="mt-4 text-sm text-gray-500">
+          <div className="mt-4 text-sm text-slate-400">
             Logged in as: {user?.email} ({userSession.role})
           </div>
         </div>
 
         {/* Test Controls */}
-        <div className="bg-white shadow rounded-lg p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Test Controls</h2>
+        <div className="bg-slate-800/50 backdrop-blur-sm shadow-xl rounded-xl border border-slate-700 p-6 mb-8">
+          <h2 className="text-xl font-semibold text-slate-100 mb-4">Test Controls</h2>
           
           {/* Basic Tests */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <button
               onClick={testEdgeFunction}
               disabled={loading}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Test Edge Function Health
             </button>
             <button
               onClick={testMongoDBHealth}
               disabled={loading}
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg hover:from-green-700 hover:to-green-800 disabled:opacity-50 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Test MongoDB Health
             </button>
@@ -203,7 +205,7 @@ export default function AdminPage() {
 
           {/* School ID Input */}
           <div className="mb-4">
-            <label htmlFor="school-id" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="school-id" className="block text-sm font-medium text-slate-300 mb-2">
               School ID (for class average calculations)
             </label>
             <input
@@ -212,7 +214,7 @@ export default function AdminPage() {
               value={schoolId}
               onChange={(e) => setSchoolId(e.target.value)}
               placeholder="Enter school UUID"
-              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200 placeholder-slate-400"
             />
           </div>
 
@@ -221,18 +223,18 @@ export default function AdminPage() {
             <button
               onClick={calculateCurrentMonth}
               disabled={loading || !schoolId}
-              className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 disabled:opacity-50"
+              className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Calculate Current Month Averages
             </button>
           </div>
 
           {/* Custom Period Calculation */}
-          <div className="border-t pt-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Calculate Custom Period</h3>
+          <div className="border-t border-slate-600 pt-6">
+            <h3 className="text-lg font-medium text-slate-200 mb-4">Calculate Custom Period</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <div>
-                <label htmlFor="month" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="month" className="block text-sm font-medium text-slate-300 mb-1">
                   Month (1-12)
                 </label>
                 <input
@@ -242,11 +244,11 @@ export default function AdminPage() {
                   max="12"
                   value={month}
                   onChange={(e) => setMonth(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200"
                 />
               </div>
               <div>
-                <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="year" className="block text-sm font-medium text-slate-300 mb-1">
                   Year
                 </label>
                 <input
@@ -256,14 +258,14 @@ export default function AdminPage() {
                   max="2030"
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200"
                 />
               </div>
               <div className="flex items-end">
                 <button
                   onClick={calculateCustomPeriod}
                   disabled={loading || !schoolId || !month || !year}
-                  className="w-full bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-orange-600 to-orange-700 text-white px-4 py-2 rounded-lg hover:from-orange-700 hover:to-orange-800 disabled:opacity-50 transition-all duration-200 shadow-lg hover:shadow-xl"
                 >
                   Calculate
                 </button>
@@ -273,28 +275,28 @@ export default function AdminPage() {
         </div>
 
         {/* Test Results */}
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-slate-800/50 backdrop-blur-sm shadow-xl rounded-xl border border-slate-700 p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-900">Test Results</h2>
+            <h2 className="text-xl font-semibold text-slate-100">Test Results</h2>
             <button
               onClick={clearResults}
-              className="text-sm text-gray-600 hover:text-gray-800"
+              className="text-sm text-slate-400 hover:text-slate-300 transition-colors"
             >
               Clear Results
             </button>
           </div>
 
           {loading && (
-            <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+            <div className="mb-4 p-4 bg-blue-500/20 border border-blue-500/30 rounded-lg backdrop-blur-sm">
               <div className="flex items-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-                <span className="text-blue-800">Running test...</span>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400 mr-2"></div>
+                <span className="text-blue-300">Running test...</span>
               </div>
             </div>
           )}
 
           {testResults.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">
+            <p className="text-slate-400 text-center py-8">
               No test results yet. Run a test to see results here.
             </p>
           ) : (
@@ -302,39 +304,39 @@ export default function AdminPage() {
               {testResults.map((result, index) => (
                 <div
                   key={`test-result-${result.timestamp}-${index}`}
-                  className={`p-4 rounded border ${
+                  className={`p-4 rounded-lg border backdrop-blur-sm ${
                     result.success 
-                      ? 'bg-green-50 border-green-200' 
-                      : 'bg-red-50 border-red-200'
+                      ? 'bg-green-500/20 border-green-500/30' 
+                      : 'bg-red-500/20 border-red-500/30'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className={`font-medium ${
-                      result.success ? 'text-green-800' : 'text-red-800'
+                      result.success ? 'text-green-400' : 'text-red-400'
                     }`}>
                       {result.success ? '✅ Success' : '❌ Failed'}
                     </span>
-                    <span className="text-sm text-gray-500">{result.timestamp}</span>
+                    <span className="text-sm text-slate-400">{result.timestamp}</span>
                   </div>
                   
                   <p className={`text-sm mb-2 ${
-                    result.success ? 'text-green-700' : 'text-red-700'
+                    result.success ? 'text-green-300' : 'text-red-300'
                   }`}>
                     {result.message}
                   </p>
 
                   {result.error && (
-                    <p className="text-sm text-red-600 mb-2">
+                    <p className="text-sm text-red-400 mb-2">
                       Error: {result.error}
                     </p>
                   )}
 
                   {result.data ? (
                     <details className="text-sm">
-                      <summary className="cursor-pointer text-gray-600 hover:text-gray-800">
+                      <summary className="cursor-pointer text-slate-400 hover:text-slate-300 transition-colors">
                         View Details
                       </summary>
-                      <pre className="mt-2 p-2 bg-gray-100 rounded overflow-auto text-xs">
+                      <pre className="mt-2 p-2 bg-slate-700/50 rounded-lg overflow-auto text-xs text-slate-300">
                         {JSON.stringify(result.data, null, 2)}
                       </pre>
                     </details>

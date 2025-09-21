@@ -45,7 +45,7 @@ interface EditingProgress {
   max_score: number;
 }
 
-const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
+const COLORS = ['#60A5FA', '#34D399', '#FBBF24', '#F87171', '#A78BFA'];
 
 export default function TeacherDashboard() {
   const { user, userSession, loading } = useAuth();
@@ -258,10 +258,10 @@ export default function TeacherDashboard() {
 
   if (loading || loadingData) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading teacher dashboard...</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500 mx-auto"></div>
+          <p className="mt-4 text-slate-300">Loading teacher dashboard...</p>
         </div>
       </div>
     );
@@ -269,13 +269,13 @@ export default function TeacherDashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="text-center">
-          <div className="text-red-600 text-xl mb-4">⚠️ Error</div>
-          <p className="text-gray-600 mb-4">{error}</p>
+          <div className="text-red-400 text-xl mb-4">⚠️ Error</div>
+          <p className="text-slate-300 mb-4">{error}</p>
           <button 
             onClick={fetchTeacherData}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             Try Again
           </button>
@@ -304,15 +304,15 @@ export default function TeacherDashboard() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Teacher Dashboard</h1>
-                <p className="mt-1 text-sm text-gray-500">
+                <h1 className="text-3xl font-bold text-slate-50">Teacher Dashboard</h1>
+                <p className="mt-1 text-sm text-slate-300">
                   Welcome, {(() => {
                     if (!userSession?.profile) return 'Teacher';
                     if ('first_name' in userSession.profile) {
@@ -324,18 +324,18 @@ export default function TeacherDashboard() {
               </div>
               <div className="flex items-center space-x-4">
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-blue-600">{overallClassAverage}%</div>
-                  <div className="text-sm text-gray-500">Class Average</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">{overallClassAverage}%</div>
+                  <div className="text-sm text-slate-400">Class Average</div>
                 </div>
                 <button
                   onClick={() => setShowNewProgressForm(true)}
-                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                  className="bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-green-500/25"
                 >
                   Add Progress
                 </button>
                 <button
                   onClick={fetchTeacherData}
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
                 >
                   Refresh
                 </button>
@@ -350,49 +350,57 @@ export default function TeacherDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-2xl font-bold text-blue-600">{students.length}</div>
-            <div className="text-sm text-gray-500">Total Students</div>
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700">
+            <div className="text-2xl font-bold text-blue-400">{students.length}</div>
+            <div className="text-sm text-slate-400">Total Students</div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-2xl font-bold text-green-600">{progressData.length}</div>
-            <div className="text-sm text-gray-500">Progress Records</div>
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700">
+            <div className="text-2xl font-bold text-green-400">{progressData.length}</div>
+            <div className="text-sm text-slate-400">Progress Records</div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-2xl font-bold text-purple-600">{classStats.length}</div>
-            <div className="text-sm text-gray-500">Active Subjects</div>
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700">
+            <div className="text-2xl font-bold text-purple-400">{classStats.length}</div>
+            <div className="text-sm text-slate-400">Active Subjects</div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-2xl font-bold text-orange-600">{overallClassAverage}%</div>
-            <div className="text-sm text-gray-500">Class Average</div>
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700">
+            <div className="text-2xl font-bold text-orange-400">{overallClassAverage}%</div>
+            <div className="text-sm text-slate-400">Class Average</div>
           </div>
         </div>
 
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Subject Performance Chart */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Subject Performance</h3>
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700">
+            <h3 className="text-lg font-medium text-slate-50 mb-4">Subject Performance</h3>
             {classStats.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={classStats}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="subject" />
-                  <YAxis domain={[0, 100]} />
-                  <Tooltip formatter={(value) => [`${value}%`, 'Average']} />
-                  <Bar dataKey="average" fill="#3B82F6" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+                  <XAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                  <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                  <Tooltip 
+                    formatter={(value) => [`${value}%`, 'Average']}
+                    contentStyle={{
+                      backgroundColor: '#1e293b',
+                      border: '1px solid #475569',
+                      borderRadius: '8px',
+                      color: '#f1f5f9'
+                    }}
+                  />
+                  <Bar dataKey="average" fill="#60A5FA" />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex items-center justify-center h-[300px] text-gray-500">
+              <div className="flex items-center justify-center h-[300px] text-slate-400">
                 No performance data available
               </div>
             )}
           </div>
 
           {/* Grade Distribution Chart */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Grade Distribution</h3>
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700">
+            <h3 className="text-lg font-medium text-slate-50 mb-4">Grade Distribution</h3>
             {progressData.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
@@ -409,11 +417,18 @@ export default function TeacherDashboard() {
                       <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip 
+                    contentStyle={{
+                      backgroundColor: '#1e293b',
+                      border: '1px solid #475569',
+                      borderRadius: '8px',
+                      color: '#f1f5f9'
+                    }}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex items-center justify-center h-[300px] text-gray-500">
+              <div className="flex items-center justify-center h-[300px] text-slate-400">
                 No grade data available
               </div>
             )}
@@ -421,50 +436,50 @@ export default function TeacherDashboard() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white p-6 rounded-lg shadow mb-8">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Filter Progress Records</h3>
+        <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-xl border border-slate-700 mb-8">
+          <h3 className="text-lg font-medium text-slate-50 mb-4">Filter Progress Records</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="student-filter" className="block text-sm font-medium text-gray-700 mb-2">Student</label>
+              <label htmlFor="student-filter" className="block text-sm font-medium text-slate-300 mb-2">Student</label>
               <select
                 id="student-filter"
                 value={selectedStudent}
                 onChange={(e) => setSelectedStudent(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-slate-500 transition-colors duration-200 backdrop-blur-sm"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                   backgroundPosition: 'right 0.5rem center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: '1.5em 1.5em',
                   paddingRight: '2.5rem'
                 }}
               >
-                <option value="all" className="py-2 px-3 text-gray-900 bg-white">All Students</option>
+                <option value="all" className="py-2 px-3 text-slate-200 bg-slate-800">All Students</option>
                 {students.map(student => (
-                  <option key={student.id} value={student.id} className="py-2 px-3 text-gray-900 bg-white">
+                  <option key={student.id} value={student.id} className="py-2 px-3 text-slate-200 bg-slate-800">
                     {student.first_name} {student.last_name}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label htmlFor="subject-filter" className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+              <label htmlFor="subject-filter" className="block text-sm font-medium text-slate-300 mb-2">Subject</label>
               <select
                 id="subject-filter"
                 value={selectedSubject}
                 onChange={(e) => setSelectedSubject(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-slate-500 transition-colors duration-200 backdrop-blur-sm"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                   backgroundPosition: 'right 0.5rem center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: '1.5em 1.5em',
                   paddingRight: '2.5rem'
                 }}
               >
-                <option value="all" className="py-2 px-3 text-gray-900 bg-white">All Subjects</option>
+                <option value="all" className="py-2 px-3 text-slate-200 bg-slate-800">All Subjects</option>
                 {subjects.map(subject => (
-                  <option key={subject} value={subject} className="py-2 px-3 text-gray-900 bg-white">
+                  <option key={subject} value={subject} className="py-2 px-3 text-slate-200 bg-slate-800">
                     {subject}
                   </option>
                 ))}
@@ -474,48 +489,48 @@ export default function TeacherDashboard() {
         </div>
 
         {/* Progress Records Table */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900">
+        <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-xl border border-slate-700">
+          <div className="px-6 py-4 border-b border-slate-600">
+            <h3 className="text-lg font-medium text-slate-50">
               Progress Records ({filteredProgress.length})
             </h3>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-slate-600">
+              <thead className="bg-slate-700/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     Student
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     Subject
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     Score
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     Percentage
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-slate-800/30 divide-y divide-slate-600">
                 {filteredProgress.map((record) => (
-                  <tr key={record.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <tr key={record.id} className="hover:bg-slate-700/20">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-200">
                       {record.student_name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">
                       {record.subject}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">
                       {editingProgress?.id === record.id ? (
-                        <div className="flex space-x-1">
+                        <div className="flex space-x-1 items-center">
                           <input
                             type="number"
                             value={editingProgress.score}
@@ -523,9 +538,9 @@ export default function TeacherDashboard() {
                               ...editingProgress,
                               score: parseInt(e.target.value) || 0
                             })}
-                            className="w-16 border border-gray-300 rounded px-2 py-1 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200"
+                            className="w-16 border border-slate-600 rounded px-2 py-1 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200"
                           />
-                          <span>/</span>
+                          <span className="text-slate-400">/</span>
                           <input
                             type="number"
                             value={editingProgress.max_score}
@@ -533,7 +548,7 @@ export default function TeacherDashboard() {
                               ...editingProgress,
                               max_score: parseInt(e.target.value) || 100
                             })}
-                            className="w-16 border border-gray-300 rounded px-2 py-1 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200"
+                            className="w-16 border border-slate-600 rounded px-2 py-1 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200"
                           />
                         </div>
                       ) : (
@@ -542,13 +557,13 @@ export default function TeacherDashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {(() => {
-                        let className = 'inline-flex px-2 py-1 text-xs font-semibold rounded-full ';
+                        let className = 'inline-flex px-2 py-1 text-xs font-semibold rounded-full border ';
                         if (record.percentage >= 80) {
-                          className += 'bg-green-100 text-green-800';
+                          className += 'bg-green-500/20 text-green-400 border-green-500/30';
                         } else if (record.percentage >= 60) {
-                          className += 'bg-yellow-100 text-yellow-800';
+                          className += 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
                         } else {
-                          className += 'bg-red-100 text-red-800';
+                          className += 'bg-red-500/20 text-red-400 border-red-500/30';
                         }
                         return (
                           <span className={className}>
@@ -557,7 +572,7 @@ export default function TeacherDashboard() {
                         );
                       })()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">
                       {new Date(record.completed_at).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -565,13 +580,13 @@ export default function TeacherDashboard() {
                         <div className="flex space-x-2">
                           <button
                             onClick={() => handleUpdateProgress(record.id, editingProgress.score, editingProgress.max_score)}
-                            className="text-green-600 hover:text-green-900"
+                            className="text-green-400 hover:text-green-300 transition-colors"
                           >
                             Save
                           </button>
                           <button
                             onClick={() => setEditingProgress(null)}
-                            className="text-gray-600 hover:text-gray-900"
+                            className="text-slate-400 hover:text-slate-300 transition-colors"
                           >
                             Cancel
                           </button>
@@ -584,13 +599,13 @@ export default function TeacherDashboard() {
                               score: record.score,
                               max_score: record.max_score
                             })}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-blue-400 hover:text-blue-300 transition-colors"
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDeleteProgress(record.id)}
-                            className="text-red-600 hover:text-red-900"
+                            className="text-red-400 hover:text-red-300 transition-colors"
                           >
                             Delete
                           </button>
@@ -607,54 +622,54 @@ export default function TeacherDashboard() {
 
       {/* Add Progress Modal */}
       {showNewProgressForm && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm overflow-y-auto h-full w-full z-50">
+          <div className="relative top-20 mx-auto p-5 border border-slate-700 w-96 shadow-2xl rounded-xl bg-slate-800/90 backdrop-blur-sm">
             <div className="mt-3">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Add New Progress Record</h3>
+              <h3 className="text-lg font-medium text-slate-50 mb-4">Add New Progress Record</h3>
               <form onSubmit={handleAddProgress} className="space-y-4">
                 <div>
-                  <label htmlFor="new-student-select" className="block text-sm font-medium text-gray-700 mb-1">Student</label>
+                  <label htmlFor="new-student-select" className="block text-sm font-medium text-slate-300 mb-1">Student</label>
                   <select
                     id="new-student-select"
                     value={newProgressForm.student_id}
                     onChange={(e) => setNewProgressForm({...newProgressForm, student_id: e.target.value})}
                     required
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                    className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-slate-500 transition-colors duration-200"
                     style={{
-                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23cbd5e1' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                       backgroundPosition: 'right 0.5rem center',
                       backgroundRepeat: 'no-repeat',
                       backgroundSize: '1.5em 1.5em',
                       paddingRight: '2.5rem'
                     }}
                   >
-                    <option value="" className="py-2 px-3 text-gray-500 bg-white">Select Student</option>
+                    <option value="" className="py-2 px-3 text-slate-400 bg-slate-700">Select Student</option>
                     {students.map(student => (
-                      <option key={student.id} value={student.id} className="py-2 px-3 text-gray-900 bg-white">
+                      <option key={student.id} value={student.id} className="py-2 px-3 text-slate-200 bg-slate-700">
                         {student.first_name} {student.last_name}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="new-subject-select" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                  <label htmlFor="new-subject-select" className="block text-sm font-medium text-slate-300 mb-1">Subject</label>
                   <select
                     id="new-subject-select"
                     value={newProgressForm.subject}
                     onChange={(e) => setNewProgressForm({...newProgressForm, subject: e.target.value})}
                     required
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                    className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none appearance-none cursor-pointer hover:border-slate-500 transition-colors duration-200"
                     style={{
-                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23cbd5e1' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                       backgroundPosition: 'right 0.5rem center',
                       backgroundRepeat: 'no-repeat',
                       backgroundSize: '1.5em 1.5em',
                       paddingRight: '2.5rem'
                     }}
                   >
-                    <option value="" className="py-2 px-3 text-gray-500 bg-white">Select Subject</option>
+                    <option value="" className="py-2 px-3 text-slate-400 bg-slate-700">Select Subject</option>
                     {subjects.map(subject => (
-                      <option key={subject} value={subject} className="py-2 px-3 text-gray-900 bg-white">
+                      <option key={subject} value={subject} className="py-2 px-3 text-slate-200 bg-slate-700">
                         {subject}
                       </option>
                     ))}
@@ -662,7 +677,7 @@ export default function TeacherDashboard() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="new-score-input" className="block text-sm font-medium text-gray-700 mb-1">Score</label>
+                    <label htmlFor="new-score-input" className="block text-sm font-medium text-slate-300 mb-1">Score</label>
                     <input
                       id="new-score-input"
                       type="number"
@@ -670,12 +685,12 @@ export default function TeacherDashboard() {
                       onChange={(e) => setNewProgressForm({...newProgressForm, score: e.target.value})}
                       required
                       min="0"
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200 placeholder-gray-500"
+                      className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200 placeholder-slate-400"
                       placeholder="Enter score"
                     />
                   </div>
                   <div>
-                    <label htmlFor="new-maxscore-input" className="block text-sm font-medium text-gray-700 mb-1">Max Score</label>
+                    <label htmlFor="new-maxscore-input" className="block text-sm font-medium text-slate-300 mb-1">Max Score</label>
                     <input
                       id="new-maxscore-input"
                       type="number"
@@ -683,7 +698,7 @@ export default function TeacherDashboard() {
                       onChange={(e) => setNewProgressForm({...newProgressForm, max_score: e.target.value})}
                       required
                       min="1"
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-gray-400 transition-colors duration-200 placeholder-gray-500"
+                      className="w-full border border-slate-600 rounded-lg px-3 py-2 bg-slate-700/50 text-slate-200 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none hover:border-slate-500 transition-colors duration-200 placeholder-slate-400"
                       placeholder="Enter max score"
                     />
                   </div>
@@ -692,13 +707,13 @@ export default function TeacherDashboard() {
                   <button
                     type="button"
                     onClick={() => setShowNewProgressForm(false)}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+                    className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-300 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                    className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl"
                   >
                     Add Progress
                   </button>

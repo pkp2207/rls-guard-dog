@@ -124,16 +124,16 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-blue-100">
+          <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700">
             <span className="text-2xl">🐕‍🦺</span>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-50">
             Join RLS Guard Dog
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-slate-300">
             Create your account to start tracking progress
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function SignupPage() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="firstName" className="block text-sm font-medium text-slate-300">
                   First Name
                 </label>
                 <input
@@ -153,11 +153,11 @@ export default function SignupPage() {
                   required
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                 />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="lastName" className="block text-sm font-medium text-slate-300">
                   Last Name
                 </label>
                 <input
@@ -167,13 +167,13 @@ export default function SignupPage() {
                   required
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-300">
                 Email Address
               </label>
               <input
@@ -184,13 +184,13 @@ export default function SignupPage() {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-medium text-slate-300">
                   Password
                 </label>
                 <input
@@ -200,11 +200,11 @@ export default function SignupPage() {
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                 />
               </div>
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-300">
                   Confirm Password
                 </label>
                 <input
@@ -214,14 +214,14 @@ export default function SignupPage() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                 />
               </div>
             </div>
 
             {/* Role Selection */}
             <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="role" className="block text-sm font-medium text-slate-300">
                 Role
               </label>
               <select
@@ -229,24 +229,24 @@ export default function SignupPage() {
                 name="role"
                 value={formData.role}
                 onChange={handleInputChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                className="mt-1 block w-full px-3 py-2 border border-slate-600 bg-slate-800/50 backdrop-blur-sm text-slate-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none cursor-pointer hover:border-slate-500 transition-all duration-200"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                   backgroundPosition: 'right 0.5rem center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: '1.5em 1.5em',
                   paddingRight: '2.5rem'
                 }}
               >
-                <option value="student" className="py-2 px-3 text-gray-900 bg-white">Student</option>
-                <option value="teacher" className="py-2 px-3 text-gray-900 bg-white">Teacher</option>
-                <option value="head_teacher" className="py-2 px-3 text-gray-900 bg-white">Head Teacher</option>
+                <option value="student" className="py-2 px-3 text-slate-50 bg-slate-800">Student</option>
+                <option value="teacher" className="py-2 px-3 text-slate-50 bg-slate-800">Teacher</option>
+                <option value="head_teacher" className="py-2 px-3 text-slate-50 bg-slate-800">Head Teacher</option>
               </select>
             </div>
 
             {/* School Selection */}
             <div>
-              <label htmlFor="schoolId" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="schoolId" className="block text-sm font-medium text-slate-300">
                 School
               </label>
               <select
@@ -255,18 +255,18 @@ export default function SignupPage() {
                 value={formData.schoolId}
                 onChange={handleInputChange}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none cursor-pointer hover:border-gray-400 transition-colors duration-200"
+                className="mt-1 block w-full px-3 py-2 border border-slate-600 bg-slate-800/50 backdrop-blur-sm text-slate-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none cursor-pointer hover:border-slate-500 transition-all duration-200"
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                   backgroundPosition: 'right 0.5rem center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: '1.5em 1.5em',
                   paddingRight: '2.5rem'
                 }}
               >
-                <option value="" className="py-2 px-3 text-gray-500 bg-white">Select a school</option>
+                <option value="" className="py-2 px-3 text-slate-400 bg-slate-800">Select a school</option>
                 {schools.map((school) => (
-                  <option key={school.id} value={school.id} className="py-2 px-3 text-gray-900 bg-white">
+                  <option key={school.id} value={school.id} className="py-2 px-3 text-slate-50 bg-slate-800">
                     {school.name}
                   </option>
                 ))}
@@ -277,7 +277,7 @@ export default function SignupPage() {
             {formData.role === 'student' && (
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="className" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="className" className="block text-sm font-medium text-slate-300">
                     Class
                   </label>
                   <input
@@ -288,11 +288,11 @@ export default function SignupPage() {
                     value={formData.className}
                     onChange={handleInputChange}
                     placeholder="e.g., 5A"
-                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                   />
                 </div>
                 <div>
-                  <label htmlFor="yearGroup" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="yearGroup" className="block text-sm font-medium text-slate-300">
                     Year Group
                   </label>
                   <input
@@ -304,7 +304,7 @@ export default function SignupPage() {
                     required
                     value={formData.yearGroup}
                     onChange={handleInputChange}
-                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                   />
                 </div>
               </div>
@@ -314,7 +314,7 @@ export default function SignupPage() {
             {formData.role !== 'student' && (
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="subjects" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="subjects" className="block text-sm font-medium text-slate-300">
                     Subjects (comma-separated)
                   </label>
                   <input
@@ -323,11 +323,11 @@ export default function SignupPage() {
                     type="text"
                     placeholder="e.g., math, science, english"
                     onChange={(e) => handleArrayInputChange('subjects', e.target.value)}
-                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                   />
                 </div>
                 <div>
-                  <label htmlFor="classes" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="classes" className="block text-sm font-medium text-slate-300">
                     Classes (comma-separated)
                   </label>
                   <input
@@ -336,7 +336,7 @@ export default function SignupPage() {
                     type="text"
                     placeholder="e.g., 5A, 5B, 6A"
                     onChange={(e) => handleArrayInputChange('classes', e.target.value)}
-                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-600 placeholder-slate-400 text-slate-50 bg-slate-800/50 backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all duration-200"
                   />
                 </div>
               </div>
@@ -344,8 +344,8 @@ export default function SignupPage() {
           </div>
 
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="text-sm text-red-700">{error}</div>
+            <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-4 backdrop-blur-sm">
+              <div className="text-sm text-red-400">{error}</div>
             </div>
           )}
 
@@ -353,16 +353,16 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
             >
               {isLoading ? 'Creating Account...' : 'Create Account'}
             </button>
           </div>
 
           <div className="text-center">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-slate-300">
               Already have an account?{' '}
-              <Link href="/auth/login" className="font-medium text-blue-600 hover:text-blue-500">
+              <Link href="/auth/login" className="font-medium text-blue-400 hover:text-blue-300 transition-colors">
                 Sign in
               </Link>
             </span>
